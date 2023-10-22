@@ -20,12 +20,13 @@
                         Author: <input name="searchAuthor" type="text" value="{{ $searchAuthor }}">
                         Category: <select name="searchCategoryId">
                             <option value="allCategories" @if ($searchCategoryId === 'allCategories') selected @endif>All categories</option>
-                            <option @if (is_null($searchCategoryId)) selected @endif></option>
+                            <option value="withoutCategory" @if ($searchCategoryId === 'withoutCategory') selected @endif>Without category</option>
                             @foreach ($categories as $key => $category)
                                 <option value="{{ $category->id }}" @if ($category->id === $searchCategoryId) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
-                        <button class="btn btn-dark mt-2">Search</button>
+                        <button class="btn btn-dark btn-sm">Search</button>
+                        <a href="{{ route('books.index') }}" class="btn btn-primary btn-sm">Clear</a>
                     </form>
                     <table class="table table-striped table-bordered">
                         <thead>

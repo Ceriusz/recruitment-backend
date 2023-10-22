@@ -28,7 +28,11 @@ class BookController extends Controller
         }
 
         if (request()->has('searchCategoryId') && request()->get('searchCategoryId') !== 'allCategories') {
-            $books = $books->where('category_id', request()->get('searchCategoryId'));
+            if (request()->get('searchCategoryId') === 'withoutCategory') {
+                $books = $books->where('category_id', null);
+            } else {
+                $books = $books->where('category_id', request()->get('searchCategoryId'));
+            }
         }
 
         return view('books.index', [
